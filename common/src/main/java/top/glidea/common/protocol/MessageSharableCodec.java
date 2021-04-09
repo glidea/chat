@@ -46,6 +46,7 @@ public class MessageSharableCodec extends MessageToMessageCodec<ByteBuf, Message
         // decode header
         String magicNum = packet.readBytes(MAGIC_NUM.length()).toString(CharsetUtil.UTF_8);
         if (!MAGIC_NUM.equals(magicNum)) {
+            ctx.channel().close();
             return;
         }
         byte messageNO = packet.readByte();
@@ -60,7 +61,7 @@ public class MessageSharableCodec extends MessageToMessageCodec<ByteBuf, Message
             out.add(message);
         } catch (Exception ignored) {
             // contentBytes 若是随意构造的，反序列化会失败，并抛出异常
-            // 不执行 out.add(message)，该消息就不会得到处理
+            ctx.channel().close();
         }
     }
 
