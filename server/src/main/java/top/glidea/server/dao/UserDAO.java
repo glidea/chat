@@ -31,11 +31,11 @@ public class UserDAO {
         }
     }
 
-    public static List<String> listUsername(int pageNO, int pageSize) {
+    public static List<String> listUsername(int pageNum, int pageSize) {
         String sql = "SELECT `username` FROM `user` LIMIT ?,?";
         try {
             return qr.query(sql, new ColumnListHandler<>()
-                    , (Math.max(pageNO, 1) - 1) * pageSize, pageSize);
+                    , (Math.max(pageNum, 1) - 1) * pageSize, pageSize);
         } catch (SQLException e) {
             log.error("DB Error: " + e);
             throw new RuntimeException();

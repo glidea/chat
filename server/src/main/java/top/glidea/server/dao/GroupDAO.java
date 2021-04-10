@@ -20,11 +20,11 @@ import java.util.Set;
 public class GroupDAO {
     private static QueryRunner qr = QueryRunnerHolder.get();
 
-    public static List<String> listGroupName(int pageNO, int pageSize) {
+    public static List<String> listGroupName(int pageNum, int pageSize) {
         String sql = "SELECT `name` FROM `group` LIMIT ?,?";
         try {
             return qr.query(sql, new ColumnListHandler<>()
-                    , (Math.max(pageNO, 1) - 1) * pageSize, pageSize);
+                    , (Math.max(pageNum, 1) - 1) * pageSize, pageSize);
         } catch (SQLException e) {
             log.error("DB Error: " + e);
             throw new RuntimeException();
