@@ -26,11 +26,12 @@ import java.util.List;
 @ChannelHandler.Sharable
 public class MessageSharableCodec extends MessageToMessageCodec<ByteBuf, Message> {
     private static final String MAGIC_NUM = "NETTYBABY";
+    private static final byte[] MAGIC_NUM_BYTES = MAGIC_NUM.getBytes(CharsetUtil.UTF_8);
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Message msg, List<Object> outList) {
         ByteBuf packet = ctx.alloc().buffer();
-        packet.writeBytes(MAGIC_NUM.getBytes());
+        packet.writeBytes(MAGIC_NUM_BYTES);
         packet.writeByte(msg.getMessageNO());
         packet.writeBytes(new byte[2]);
 
@@ -44,11 +45,12 @@ public class MessageSharableCodec extends MessageToMessageCodec<ByteBuf, Message
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf packet, List<Object> out) {
         // decode header
-        String magicNum = packet.readBytes(MAGIC_NUM.length()).toString(CharsetUtil.UTF_8);
+        String magicNum = packet.readBytes(MAGIC_NUM_BYTES.length).toString(CharsetUtil.UTF_8);
         if (!MAGIC_NUM.equals(magicNum)) {
             ctx.channel().close();
             return;
         }
+
         byte messageNO = packet.readByte();
         packet.readBytes(2);
         int length = packet.readInt();

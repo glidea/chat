@@ -40,7 +40,8 @@ public class Client {
                         }
                     }
                 })
-                .addLast(new GlobalHandler());
+                .addLast(new GlobalHandler())
+                ;
                 }
             });
 

@@ -16,7 +16,7 @@ public class LruSafeCache<K, V> {
     /**
      * 缓存最大容量
      */
-    private int DEFAULT_MAX_CAP = 1024;
+    private final int DEFAULT_MAX_CAP = 1024;
     private int maxCap = DEFAULT_MAX_CAP;
     /**
      * 读写锁

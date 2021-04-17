@@ -1,10 +1,7 @@
 package top.glidea.server;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelDuplexHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -20,6 +17,14 @@ import top.glidea.server.handler.groupchat.*;
 import top.glidea.server.handler.login.LoginRequestHandler;
 import top.glidea.server.handler.singlechat.ListUsersRequestHandler;
 import top.glidea.server.handler.singlechat.SendRequestHandler;
+
+import java.io.*;
+import java.net.Socket;
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 public class Server {
@@ -60,7 +65,8 @@ public class Server {
                     .addLast(GroupQuitRequestHandler.getInstance())
                     .addLast(GroupSendRequestHandler.getInstance())
                     .addLast(GroupMembersRequestHandler.getInstance())
-                    .addLast(QuitHandler.getInstance());
+                    .addLast(QuitHandler.getInstance())
+                    ;
                 }
             });
             Channel channel = serverBootstrap.bind(8080).sync().channel();
