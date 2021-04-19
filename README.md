@@ -21,7 +21,7 @@
 * 自定义协议、消息编解码器（`top.glidea.common.protocol`）
 * 帧解码器解决粘包，半包（拆包）（`top.glidea.common.protocol`）
 * 本地 LRU Cache（`top.glidea.server.util`）缓存群成员信息，加速群消息转发
-* CopyOnWriteArrayList、ConcurrentHashMap
+* CopyOnWriteArrayList、ConcurrentHashMap、CountDownLatch、AtomicBoolean
 ### 自定义协议
 >---
 | 魔数（NETTYBABY） | 消息编号 | 填充 | 正文长度 | 正文   |
