@@ -76,18 +76,18 @@ public enum Serializer {
     };
 
     public <T> byte[] serialize(T t, Class<T> classOfT) {
-        throw new RuntimeException("禁止调用！");
+        throw new UnsupportedOperationException();
     }
 
     public <T> T deSerialize(byte[] bytes, Class<T> classOfT) {
-        throw new RuntimeException("禁止调用！");
+        throw new UnsupportedOperationException();
     }
 
     public String toJsonString(Object o) {
-        throw new RuntimeException("禁止调用！");
+        throw new UnsupportedOperationException();
     }
 
     public <T> T toObj(String json, Class<T> classOfT) {
-        throw new RuntimeException("禁止调用！");
+        throw new UnsupportedOperationException();
     }
 }

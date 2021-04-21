@@ -85,7 +85,7 @@ public class GroupService {
                 throw new Exception();
             }
             qr.update("COMMIT");
-
+            
             CopyOnWriteArrayList<String> cacheMembers = groupMemberCache.get(groupName);
             if (cacheMembers != null) {
                 cacheMembers.add(memberName);
